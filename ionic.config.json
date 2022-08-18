@@ -1,0 +1,7 @@
+{
+  "name": "Squadrons PreBeer League Elo Project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

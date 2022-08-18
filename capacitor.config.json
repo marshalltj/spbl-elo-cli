@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Squadrons PreBeer League Elo Project",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
