@@ -1,20 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title slot="start">
+      Squadrons PreBeer League
     </ion-title>
+    <ion-button slot="start" (click)="navPlayers()"><ion-icon name="people-outline"></ion-icon> Players</ion-button>
+    <ion-button slot="start" (click)="navEvents()"><ion-icon name="reader-outline"></ion-icon> Events</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong>Top 10 Players</strong>
+      <ion-list>
+        <ion-item *ngFor="let player of Players.data">
+          <ion-label>
+            <h3>{{player.name}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
   </div>
 </ion-content>
