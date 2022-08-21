@@ -8,15 +8,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div id="container">
-    <strong>Top 10 Players</strong>
-      <ion-list>
-        <ion-item *ngFor="let player of Players.data">
-          <ion-label>
-            <h3>{{player.name}}</h3>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-  </div>
+<ion-content>
+  <center><h1>Top 10 Players</h1></center>
+  <ion-grid>
+    <ion-row>
+      <ion-col><b>Name</b></ion-col>
+      <ion-col><b>Elo</b></ion-col>
+      <ion-col><b>Wins</b></ion-col>
+      <ion-col><b>Losses</b></ion-col>
+      <ion-col><b>Role</b></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let player of players.data">
+      <ion-col>{{player.name}}</ion-col>
+      <ion-col>{{player.elo}}</ion-col>
+      <ion-col>{{player.wins}}</ion-col>
+      <ion-col>{{player.losses}}</ion-col>
+      <ion-col>{{player.role}}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

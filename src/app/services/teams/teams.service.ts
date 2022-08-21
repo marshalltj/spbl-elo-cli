@@ -5,13 +5,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import serviceConfig from '../serviceConfig.json';
-import { Game } from '../../models/game.model';
 import { Response } from '../../models/response.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlayersService {
+export class TeamsService {
 
   endpoint = serviceConfig.endpoint;
 
@@ -21,52 +20,39 @@ export class PlayersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  async getTopPlayers(){
+  getGames(team){
     return new Promise((resolve, reject) => {
-      this.httpClient.get(this.endpoint + "/players/top")
-      .toPromise()
-      .then(
-        res => {
-          console.log('Top player retrieved', res);
-          resolve(res);
-        }
-      )
-    });
-  }
-
-  getPlayers(){
-    return new Promise((resolve, reject) => {
-      this.httpClient.get(this.endpoint + "/players")
-      .toPromise()
-      .then(
-        res => {
-          console.log('Players retrieved', res);
-          resolve(res);
-        }
-      )
-    });
-  }
-
-  getTeams(player){
-    return new Promise((resolve, reject) => {
-      this.httpClient.get(this.endpoint + "/players/" + player + "/teams")
-      .toPromise()
-      .then(
-        res => {
-          console.log('Teams retrieved', res);
-          resolve(res);
-        }
-      )
-    });
-  }
-
-  getGamesByTeam(player, team){
-    return new Promise((resolve, reject) => {
-      this.httpClient.get(this.endpoint + "/teams/" + team + "/games/" + player)
+      this.httpClient.get(this.endpoint + "/teams/" + team + "/games")
       .toPromise()
       .then(
         res => {
           console.log('Games retrieved', res);
+          resolve(res);
+        }
+      )
+    });
+  }
+
+  getTeam(team){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.endpoint + "/teams/" + team)
+      .toPromise()
+      .then(
+        res => {
+          console.log('Team retrieved', res);
+          resolve(res);
+        }
+      )
+    });
+  }
+
+  getPlayers(team, game){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.endpoint + "/teams/" + team + "/players/" + game)
+      .toPromise()
+      .then(
+        res => {
+          console.log('Players for Team retrieved', res);
           resolve(res);
         }
       )

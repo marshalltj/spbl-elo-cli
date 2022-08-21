@@ -1,3 +1,8 @@
+/*
+home page TODO:
+  -on player name click, route to players page w/ nav extras of selected player
+  -numbered ranks
+*/
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersService } from './../services/players/players.service';
@@ -9,17 +14,13 @@ import { PlayersService } from './../services/players/players.service';
 })
 export class HomePage {
 
-  Players: any = [];
+  players: any = [];
 
   constructor(private route: Router, private playersService: PlayersService) {}
 
-  ionViewDidEnter() {
-    this.playersService.getTopPlayers().subscribe((response)=> {
-      console.log("home page response: ", response)
-      this.Players = response;
-    })
+  async ionViewDidEnter() {
+    this.players = await this.playersService.getTopPlayers();
   }
-
 
   navPlayers(){
     this.route.navigate(['/players']);
