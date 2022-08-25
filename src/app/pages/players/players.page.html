@@ -1,7 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <button ion-button icon-only clear item-right slot="start" (click)="navHome()"><ion-icon name='arrow-back' icon-start></ion-icon></button>
-    <ion-title>Players</ion-title>
+  <ion-toolbar>  
+    <ion-icon class="homeIcon" name='home-outline' slot="start" (click)="navHome()"></ion-icon>
+    <ion-title slot="start">
+      Players
+    </ion-title>
+    <ion-button slot="start" (click)="navEvents()"><ion-icon name="today-outline"></ion-icon> Events</ion-button>
+    <ion-button slot="start" (click)="navAbout()"><ion-icon name="reader-outline"></ion-icon> About</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -32,29 +36,33 @@
     <ion-row><ion-col><h3>{{team.event.name}} - {{team.event.date.toLocaleDateString()}} - {{team.team_name}}</h3></ion-col></ion-row>
     <ion-row><ion-col><h4>Games</h4></ion-col></ion-row>
     <ion-row>
-      <ion-col><b>Round</b></ion-col>
-      <ion-col><b>Result</b></ion-col>
-      <ion-col><b>Opponent</b></ion-col>
+      <ion-col size="1"><b>Round</b></ion-col>
+      <ion-col size="1"><b>Result</b></ion-col>
+      <ion-col size="3"><b>Opponent</b></ion-col>
       <ion-col><b>Faction</b></ion-col>
-      <ion-col><b>Map</b></ion-col>
-      <ion-col><b>Player Elo</b></ion-col>
-      <ion-col><b>Team Avg Elo</b></ion-col>
+      <ion-col size=><b>Map</b></ion-col>
+      <ion-col size="1"><b>Player Elo</b></ion-col>
+      <ion-col size="1"><b>Team Elo</b></ion-col>
       <ion-col><b>Elo Change</b></ion-col>
     </ion-row>
     <div *ngFor="let game of team.games">
       <div *ngIf="game.win_team">
         <ion-row>
-          <ion-col>{{game.round}}</ion-col>
-          <ion-col *ngIf="game.win_team == team.id">Win</ion-col>
-          <ion-col *ngIf="game.win_team != team.id">Loss</ion-col>
-          <ion-col *ngIf="game.nr_team == team.id">{{game.team_name}} ({{game.emp_team_elo}})</ion-col>
-          <ion-col *ngIf="game.emp_team == team.id">{{game.team_name}} ({{game.nr_team_elo}})</ion-col>
+          <ion-col size="1">{{game.round}}</ion-col>
+          <ion-col *ngIf="game.win_team == team.id" size="1">Win</ion-col>
+          <ion-col *ngIf="game.win_team != team.id" size="1">Loss</ion-col>
+          <ion-col *ngIf="game.nr_team == team.id" (click)="showGameDetails($event, game.emp_team, game.id)" size="3" class="clickCol">
+            {{game.team_name}} ({{game.emp_team_elo}})
+          </ion-col>
+          <ion-col *ngIf="game.emp_team == team.id" (click)="showGameDetails($event, game.nr_team, game.id)" size="3" class="clickCol">
+            {{game.team_name}} ({{game.nr_team_elo}})
+          </ion-col>
           <ion-col *ngIf="game.nr_team == team.id">New Republic</ion-col>
           <ion-col *ngIf="game.emp_team == team.id">Empire</ion-col>
           <ion-col>{{game.map}}</ion-col>
-          <ion-col>{{game.historical_elo}}</ion-col>
-          <ion-col *ngIf="game.nr_team == team.id">{{game.nr_team_elo}}</ion-col>
-          <ion-col *ngIf="game.emp_team == team.id">{{game.emp_team_elo}}</ion-col>
+          <ion-col size="1">{{game.historical_elo}}</ion-col>
+          <ion-col *ngIf="game.nr_team == team.id" size="1">{{game.nr_team_elo}}</ion-col>
+          <ion-col *ngIf="game.emp_team == team.id" size="1">{{game.emp_team_elo}}</ion-col>
           <ion-col *ngIf="game.win_team == team.id">+{{game.elo_score}} </ion-col>
           <ion-col *ngIf="game.win_team != team.id">-{{game.elo_score}} </ion-col>
         </ion-row>
@@ -70,8 +78,8 @@
     <ion-col><b>Losses</b></ion-col>
     <ion-col><b>Role</b></ion-col>
   </ion-row>
-  <ion-row *ngFor="let player of players.data">
-    <ion-col (click)="getPlayerResults(player)">{{player.name}}</ion-col>
+  <ion-row *ngFor="let player of topPlayers.data">
+    <ion-col (click)="getPlayerResults(player)" class="clickCol">{{player.name}}</ion-col>
     <ion-col>{{player.elo}}</ion-col>
     <ion-col>{{player.wins}}</ion-col>
     <ion-col>{{player.losses}}</ion-col>

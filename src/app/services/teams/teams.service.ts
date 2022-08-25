@@ -26,7 +26,20 @@ export class TeamsService {
       .toPromise()
       .then(
         res => {
-          console.log('Games retrieved', res);
+          console.log('Games retrieved');
+          resolve(res);
+        }
+      )
+    });
+  }
+
+  getTeams(event){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.endpoint + "/events/" + event + "/teams")
+      .toPromise()
+      .then(
+        res => {
+          console.log('Games retrieved');
           resolve(res);
         }
       )
@@ -39,20 +52,20 @@ export class TeamsService {
       .toPromise()
       .then(
         res => {
-          console.log('Team retrieved', res);
+          console.log('Team retrieved');
           resolve(res);
         }
       )
     });
   }
 
-  getPlayers(team, game){
+  getPlayers(team){
     return new Promise((resolve, reject) => {
-      this.httpClient.get(this.endpoint + "/teams/" + team + "/players/" + game)
+      this.httpClient.get(this.endpoint + "/teams/" + team + "/players")
       .toPromise()
       .then(
         res => {
-          console.log('Players for Team retrieved', res);
+          console.log('Players for Team retrieved');
           resolve(res);
         }
       )

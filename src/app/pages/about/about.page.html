@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>  
+    <ion-icon class="homeIcon" name='home-outline' slot="start" (click)="navHome()"></ion-icon>
+    <ion-title slot="start">
+      About
+    </ion-title>
+    <ion-button slot="start" (click)="navPlayers()"><ion-icon name="people-outline"></ion-icon> Players</ion-button>
+    <ion-button slot="start" (click)="navEvents()"><ion-icon name="today-outline"></ion-icon> Events</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <center>
+    <div >
+      <h1>What is Squadrons PreBeer League</h1>
+      <p>
+        The Squadrons PreBeer League is a casual invite league, with the main goal of stacking high-skill competitive players against each other outside of the teams they typically play on.<br><br>
+        Each event, new teams are created via draft or randomization.<br><br>
+        The pool of players and number of teams is kept small in order to keep events short and also keep team quality high (the more teams you have, the more spread out top rated players get.)<br><br>
+        Sub spots are open to literally any player, so reach out to Esoda or Tom if you haven't been invited and want to start getting involved.
+      </p>
+      <h1>Leaderboard and Elo</h1>
+      <p>
+        The leaderboard used here is a simple implementation of the <a href="https://en.wikipedia.org/wiki/Elo_rating_system" target=”_blank”>chess Elo rating system</a>.<br><br>
+        Simply put - if you beat a team with a higher ranking than you, you'll get more points and they'll lose more points. The inverse is true you lose to a team with a lower rating than you.<br><br>
+        Every new player starts at a rating of 1500.<br><br>
+        Team Elo is averaged and that value is used for the two teams to calculate the Elo win percentage chance and points distribution.<br><br>
+        The K factor used is 32.
+      </p>
+   </div>
+  </center>
+</ion-content>

@@ -8,9 +8,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { TeamPopoverComponent } from './components/team-popover/team-popover.component';
+import { OpponentsPopoverComponent } from './components/opponents-popover/opponents-popover.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TeamPopoverComponent, OpponentsPopoverComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

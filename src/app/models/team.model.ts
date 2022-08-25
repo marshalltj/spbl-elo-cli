@@ -1,5 +1,5 @@
 import { Game } from './game.model';
-import { Event } from './event.model';
+import { SpblEvent } from './spbl-event.model';
 import { Response } from './response.model';
 
 export class Team {
@@ -7,7 +7,7 @@ export class Team {
   captain: string;
   team_name: string;
   games: Game[];
-  event: Event;
+  event: SpblEvent;
 
   constructor(team?: any){
     if (team)

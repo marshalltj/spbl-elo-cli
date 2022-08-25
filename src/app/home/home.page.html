@@ -4,12 +4,15 @@
       Squadrons PreBeer League
     </ion-title>
     <ion-button slot="start" (click)="navPlayers()"><ion-icon name="people-outline"></ion-icon> Players</ion-button>
-    <ion-button slot="start" (click)="navEvents()"><ion-icon name="reader-outline"></ion-icon> Events</ion-button>
+    <ion-button slot="start" (click)="navEvents()"><ion-icon name="today-outline"></ion-icon> Events</ion-button>
+    <ion-button slot="start" (click)="navAbout()"><ion-icon name="reader-outline"></ion-icon> About</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <center><h1>Top 10 Players</h1></center>
+  <center><h1>Welcome to the Squadrons PreBeer League Elo Leaderboard!</h1></center>
+  <center><h2>Next Event - {{nextEvent.name}} on {{dateStr}}</h2></center>
+  <center><h2>Top 10 Players</h2></center>
   <ion-grid>
     <ion-row>
       <ion-col><b>Name</b></ion-col>
@@ -18,7 +21,7 @@
       <ion-col><b>Losses</b></ion-col>
       <ion-col><b>Role</b></ion-col>
     </ion-row>
-    <ion-row *ngFor="let player of players.data">
+    <ion-row *ngFor="let player of players | slice:0:10">
       <ion-col>{{player.name}}</ion-col>
       <ion-col>{{player.elo}}</ion-col>
       <ion-col>{{player.wins}}</ion-col>

@@ -1,0 +1,12 @@
+<ion-grid>
+  <ion-row>
+    <ion-col><b>Player</b></ion-col>
+    <ion-col><b>Elo</b></ion-col>
+    <ion-col><b>Role</b></ion-col>
+  </ion-row>
+  <ion-row *ngFor="let player of players.data">
+    <ion-col>{{player.name}}</ion-col>
+    <ion-col>{{player.elo}}</ion-col>
+    <ion-col>{{player.role}}</ion-col>
+  </ion-row>
+</ion-grid>

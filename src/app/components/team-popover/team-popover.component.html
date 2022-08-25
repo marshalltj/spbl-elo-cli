@@ -1,0 +1,32 @@
+<ion-grid>
+  <ion-row><ion-col size="3"><h4>Players</h4></ion-col></ion-row>
+  <ion-row>
+    <ion-col size="3"><b>Name</b></ion-col>
+    <ion-col size="2"><b>Elo</b></ion-col>
+    <ion-col size="3"><b>Role</b></ion-col>
+  </ion-row>
+  <ion-row *ngFor="let player of players.data">
+    <ion-col size="3">{{player.name}}</ion-col>
+    <ion-col size="2">{{player.elo}}</ion-col>
+    <ion-col size="3">{{player.role}}</ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row><ion-col size="3"><h4>Games</h4></ion-col></ion-row>
+  <ion-row>
+    <ion-col size="2"><b>Round</b></ion-col>
+    <ion-col size="2"><b>Result</b></ion-col>
+    <ion-col size="5"><b>Opponent</b></ion-col>
+    <ion-col size="3"><b>Faction</b></ion-col>
+  </ion-row>
+  <ion-row *ngFor="let game of games.data">
+    <ion-col size="2">{{game.round}}</ion-col>
+    <ion-col *ngIf="teamId == game.win_team" size="2">Win (+{{game.elo_score}})</ion-col>
+    <ion-col *ngIf="teamId != game.win_team" size="2">Loss (-{{game.elo_score}})</ion-col>
+    <ion-col *ngIf="teamId == game.emp_team" size="5">{{findWinner(game.nr_team)}}</ion-col>
+    <ion-col *ngIf="teamId == game.nr_team" size="5">{{findWinner(game.emp_team)}}</ion-col>
+    <ion-col *ngIf="teamId == game.emp_team" size="3">Empire</ion-col>
+    <ion-col *ngIf="teamId == game.nr_team" size="3">New Republic</ion-col>
+  </ion-row>
+</ion-grid>

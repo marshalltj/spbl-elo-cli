@@ -1,10 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <button ion-button icon-only clear item-right slot="start" (click)="navHome()"><ion-icon name='arrow-back' icon-start></ion-icon></button>
-    <ion-title>Events</ion-title>
+  <ion-toolbar>  
+    <ion-icon class="homeIcon" name='home-outline' slot="start" (click)="navHome()"></ion-icon>
+    <ion-title slot="start">
+      Events
+    </ion-title>
+    <ion-button slot="start" (click)="navPlayers()"><ion-icon name="people-outline"></ion-icon> Players</ion-button>
+    <ion-button slot="start" (click)="navAbout()"><ion-icon name="reader-outline"></ion-icon> About</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid *ngFor="let event of events">
+    <ion-row><ion-col><h3>{{event.name}} - {{event.dateStr}}</h3></ion-col></ion-row>
+    <ion-row>
+      <ion-col size="4"><b>Team</b></ion-col>
+      <ion-col><b>Score</b></ion-col>
+      <ion-col><b>Wins</b></ion-col>
+      <ion-col><b>Losses</b></ion-col>
+      <ion-col><b>Splits</b></ion-col>
+      <ion-col><b>Captain</b></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let team of event.teams">
+      <ion-col (click)="showTeamDetails($event, team.id, event.teams)" size="4" class="clickCol">{{team.team_name}}</ion-col>
+      <ion-col>{{team.score}}</ion-col>
+      <ion-col>{{team.wins}}</ion-col>
+      <ion-col>{{team.losses}}</ion-col>
+      <ion-col>{{team.splits}}</ion-col>
+      <ion-col>{{team.captain}}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

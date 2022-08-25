@@ -5,7 +5,12 @@ home page TODO:
 */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { PlayersService } from './../services/players/players.service';
+import { EventsService } from './../services/events/events.service';
+
+import { SpblEvent } from './../models/spbl-event.model';
+import { Response } from './../models/response.model';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +20,19 @@ import { PlayersService } from './../services/players/players.service';
 export class HomePage {
 
   players: any = [];
+  nextEvent: SpblEvent = new SpblEvent();
+  dateStr: string = "";
 
-  constructor(private route: Router, private playersService: PlayersService) {}
+  constructor(private route: Router, 
+              private playersService: PlayersService,
+              private eventsService: EventsService) {}
 
   async ionViewDidEnter() {
-    this.players = await this.playersService.getTopPlayers();
+    var playersResponse: Response = await this.playersService.getTopPlayers();
+    this.players = playersResponse.data;
+    var eventsResponse: Response = await this.eventsService.getEvents();
+    this.nextEvent = eventsResponse.data[0];
+    this.dateStr = new Date(this.nextEvent.date).toLocaleDateString();
   }
 
   navPlayers(){
@@ -28,6 +41,10 @@ export class HomePage {
 
   navEvents(){
     this.route.navigate(['/events']);
+  }
+
+  navAbout(){
+    this.route.navigate(['/about']);
   }
 
 }

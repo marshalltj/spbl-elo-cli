@@ -27,7 +27,7 @@ export class PlayersService {
       .toPromise()
       .then(
         res => {
-          console.log('Top player retrieved', res);
+          console.log('Top player retrieved');
           resolve(res);
         }
       )
@@ -40,7 +40,7 @@ export class PlayersService {
       .toPromise()
       .then(
         res => {
-          console.log('Players retrieved', res);
+          console.log('Players retrieved');
           resolve(res);
         }
       )
@@ -53,7 +53,7 @@ export class PlayersService {
       .toPromise()
       .then(
         res => {
-          console.log('Teams retrieved', res);
+          console.log('Teams retrieved');
           resolve(res);
         }
       )
@@ -66,7 +66,20 @@ export class PlayersService {
       .toPromise()
       .then(
         res => {
-          console.log('Games retrieved', res);
+          console.log('Games retrieved');
+          resolve(res);
+        }
+      )
+    });
+  }
+
+  getPlayersInGame(team, game){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.endpoint + "/teams/" + team + "/players/" + game)
+      .toPromise()
+      .then(
+        res => {
+          console.log('Players retrieved');
           resolve(res);
         }
       )
